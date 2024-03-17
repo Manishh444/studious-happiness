@@ -22,6 +22,10 @@ docker volume rm vol_name
 docker volume prune
 
 ------------------------------all new section-------------------
+NOTE : i did have to install docker-compose package as it was not availabel in WSL
+
+sudo apt install docker-compose 
+
 docker-compose up -d
 
 docker-compose down
