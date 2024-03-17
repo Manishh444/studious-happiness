@@ -1,0 +1,7 @@
+docker build -t prodimg .
+
+docker run -v $(pwd):/app -d -p 7000:7000 --name prod prodimg
+
+docker exec -it prod bash
+
+docker 
