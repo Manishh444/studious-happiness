@@ -13,8 +13,10 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+# Env variable 
+ENV PORT 7000
 # Expose the port the app runs on
-EXPOSE 7000
+EXPOSE $PORT
 
 # Command to run the application
 CMD ["npm", "run","dev"]

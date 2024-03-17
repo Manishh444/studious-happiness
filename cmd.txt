@@ -2,6 +2,21 @@ docker build -t prodimg .
 
 docker run -v $(pwd):/app -d -p 7000:7000 --name prod prodimg
 
+// this command is making sure that node_modules do not get deleted in docker conatiner when deleted in source code
+
+docker run -v $(pwd):/app -v /app/node_modules -d -p 7000:7000 --name prod prodimg
+
+
+// read only bind mount 
+
+docker run -v $(pwd):/app:ro -v /app/node_modules -d -p 7000:7000 --name prod prodimg
+
+
+
 docker exec -it prod bash
 
-docker 
+docker logs container_name // show a;; 
+
+docker volume ls
+docker volume rm vol_name
+docker volume prune
