@@ -4,6 +4,7 @@
   "description": "docker repo",
   "main": "server.js",
   "scripts": {
+    "start" : "node server.js",
     "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
