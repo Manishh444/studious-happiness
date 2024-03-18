@@ -32,7 +32,8 @@ docker-compose up -d --build //build new images
 docker-compose down
 docker-compose down -v // del attached volume
 
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build // buil new images 
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build // buil new images 
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d  
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v 
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
 
