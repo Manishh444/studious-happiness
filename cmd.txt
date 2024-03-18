@@ -35,3 +35,18 @@ docker-compose down -v // del attached volume
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build // buil new images 
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v 
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
+
+
+===============================MONGO DB CMD ver 7==============
+mongosh// to open terminal
+
+ mongosh "mongodb://manish:1234@localhost:27017/admin" // login as admin
+
+docker exec -it idkdocker_mongo_1 mongosh -u "manish" -p "1234"
+ 
+ show dbs
+
+ show collection 
+
+ use mydb
+

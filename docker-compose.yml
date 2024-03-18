@@ -9,3 +9,16 @@ services:
       - /app/node_modules
     environment:
       - PORT=7000
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=manish
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+    volumes:
+      - mongo-db:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-db:
