@@ -27,6 +27,11 @@ NOTE : i did have to install docker-compose package as it was not availabel in W
 sudo apt install docker-compose 
 
 docker-compose up -d
+docker-compose up -d --build //build new images
 
 docker-compose down
+docker-compose down -v // del attached volume
 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build // buil new images 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v

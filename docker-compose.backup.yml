@@ -1,6 +1,6 @@
 version: "3"
 services:
-  node-app:
+  prod-node:
     build: .
     ports:
       - "7000:7000"
@@ -9,3 +9,5 @@ services:
       - /app/node_modules
     environment:
       - PORT=7000
+    # env_file:
+    #   - ./.env

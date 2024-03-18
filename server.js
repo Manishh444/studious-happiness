@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express();
 
 app.get("/", (req, res) => {
-  res.json({ message: "hello again from production in read only mode with docker compose with env" });
+  res.json({ message: "hello again from production in read only mode with docker compose with env from docker compose from prod" });
 });
 
 const PORT = process.env.PORT
