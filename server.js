@@ -1,10 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const {
+  MONGO_USER,
+  MONGO_PASSWORD,
+  MONGO_IP,
+  MONGO_PORT,
+} = require("./config/config");
 require("dotenv").config();
 
 const app = express();
 
-const uri = "mongodb://manish:1234@192.168.64.2:27017/admin";
+const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))

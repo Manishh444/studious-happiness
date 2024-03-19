@@ -50,4 +50,16 @@ docker exec -it idkdocker_mongo_1 mongosh -u "manish" -p "1234"
  show collection 
 
  use mydb
+=========================================new section=============
+
+docker inspect container_name
+
+docker logs conatiner_name -f
+
+docker logs conatiner_name -f // this will update logs live
+
+docker network ls
+
+docker network inspect idkdocker_default
+
 
