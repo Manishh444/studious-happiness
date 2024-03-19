@@ -1,4 +1,4 @@
-const Post = require("../models/postMondels.js")
+const Post = require("../models/postModels.js")
 
 exports.getAllPost= async(req, res, next)=>{
     try {
@@ -21,7 +21,7 @@ exports.getAllPost= async(req, res, next)=>{
 
 exports.getOnePost =async(req, res, next)=>{
     try {
-        const posts = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
         res.status(200).json(
             {
                 status : 'success',
@@ -38,7 +38,7 @@ exports.getOnePost =async(req, res, next)=>{
 }
 exports.createPost =async(req, res, next)=>{
     try {
-        const posts = await Post.create(req.body);
+        const post = await Post.create(req.body);
         res.status(200).json(
             {
                 status : 'success',
@@ -48,6 +48,7 @@ exports.createPost =async(req, res, next)=>{
             }
         )
     } catch (error) {
+        console.log("error:",error)
         res.status(400).json({
             status: 'fail',
         })
@@ -56,7 +57,7 @@ exports.createPost =async(req, res, next)=>{
 
 exports.updatePost =async(req, res, next)=>{
     try {
-        const posts = await Post.findByIdAndUpdate(req.params.id, req.body,{
+        const post = await Post.findByIdAndUpdate(req.params.id, req.body,{
             new: true,
             runValidators: true
         } );
@@ -76,7 +77,7 @@ exports.updatePost =async(req, res, next)=>{
 }
 exports.deletePost =async(req, res, next)=>{
     try {
-        const posts = await Post.findByIdAndDelete(req.params.id);
+        const post = await Post.findByIdAndDelete(req.params.id);
         res.status(200).json(
             {
                 status : 'success',

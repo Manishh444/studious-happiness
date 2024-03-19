@@ -6,8 +6,8 @@ const router = express.Router()
 
 
 router
-    .route('/')
-    .get(postController.getAllPosts)
+    .route("/")
+    .get(postController.getAllPost)
     .post(postController.createPost)
 
 router

@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
   body: {
     type: String,
     required: [true, "post must have body"],
-  },
+  }
 });
 
 const Post = mongoose.model("Post", postSchema);
