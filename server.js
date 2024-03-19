@@ -7,8 +7,9 @@ const {
   MONGO_PORT,
 } = require("./config/config");
 require("dotenv").config();
-
+const postRouter =  require('./routes/postRoutes')
 const app = express();
+app.use('/posts', postRouter)
 
 function connectMongo() {
   const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
@@ -29,6 +30,8 @@ app.get("/", (req, res) => {
       "hello again from production in read only mode with docker compose with env from docker compose from dev",
   });
 });
+
+
 
 const PORT = process.env.PORT;
 console.log(PORT);
