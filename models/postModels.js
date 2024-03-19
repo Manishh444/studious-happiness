@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
   },
   body: {
     type: String,
-    required: [true, "post must have body"],
+    require: [true, "post must have body"],
   }
 });
 
