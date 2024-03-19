@@ -10,11 +10,18 @@ require("dotenv").config();
 
 const app = express();
 
-const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Error connecting to MongoDB:", error));
+function connectMongo() {
+  const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+  mongoose
+    .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((error) => {
+      console.error("Error connecting to MongoDB:", error);
+      setTimeout(connectMongo, 5000);
+    });
+}
+
+connectMongo();
 
 app.get("/", (req, res) => {
   res.json({

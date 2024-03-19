@@ -9,7 +9,8 @@ services:
       - /app/node_modules
     environment:
       - PORT=7000
-
+    depends_on:
+      - mongo
   mongo:
     image: mongo
     environment:

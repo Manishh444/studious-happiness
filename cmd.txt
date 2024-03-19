@@ -63,3 +63,10 @@ docker network ls
 docker network inspect idkdocker_default
 
 
+================================================== tricks ==================
+// this cmd start node-container with dependency (mongo)
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d node-app 
+
+// this will only start node container and ignore dependency
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --no-deps node-app 
+
