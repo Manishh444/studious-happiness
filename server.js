@@ -1,11 +1,25 @@
-const express = require("express");
-const mongoose = require("mongoose");
 const {
   MONGO_USER,
   MONGO_PASSWORD,
   MONGO_IP,
   MONGO_PORT,
+  REDIS_URL,
+  REDIS_PORT,
+  SESSION_SECRET,
 } = require("./config/config");
+const redis =  require("redis")
+const redisClient = redis.createClient({
+  host: REDIS_URL,
+  port: REDIS_PORT
+})
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const RedisStore =  require('connect-redis').default
+// let RedisStore = require("connect-redis")(session);
+
+
+
 require("dotenv").config();
 
 const postRouter =  require('./routes/postRoutes')
@@ -13,6 +27,17 @@ const userRouter = require("./routes/userRoutes")
 
 const app = express();
 app.use(express.json())
+app.use(session({
+  store: new RedisStore({client: redisClient}),
+  secret: SESSION_SECRET,
+  cookie:{
+    secure: false,
+    resave: false,
+    saveUninitialized: false,
+    httpOnly: true,
+    maxAge: 30000
+  }
+}))
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/users', userRouter)
 
