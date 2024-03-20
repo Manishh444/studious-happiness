@@ -28,7 +28,7 @@ exports.login = async (req, res)=>{
     const {username, password} =  req.body
     try {
         const user = await User.findOne({username})
-        console.log("line 31 auth", user)
+        // console.log("line 31 auth", user)
         if(!user){
             return res.status(400).json({
                 status: 'fail',

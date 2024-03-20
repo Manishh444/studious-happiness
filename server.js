@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const {
   MONGO_USER,
   MONGO_PASSWORD,
@@ -7,37 +9,56 @@ const {
   REDIS_PORT,
   SESSION_SECRET,
 } = require("./config/config");
-const redis =  require("redis")
-const redisClient = redis.createClient({
-  host: REDIS_URL,
-  port: REDIS_PORT
-})
+const cors = require("cors");
+
+
+
+const cookieParser = require('cookie-parser');
 const express = require("express");
 const mongoose = require("mongoose");
-const session = require("express-session");
 const RedisStore =  require('connect-redis').default
-// let RedisStore = require("connect-redis")(session);
+const session = require("express-session");
+
+const redis =  require("redis")
+const redisClient = redis.createClient({socket:{
+  host: 'redis',
+  port: 6379,
+  // tls: true,
+}})
+redisClient.connect().catch(console.error)
 
 
-
-require("dotenv").config();
 
 const postRouter =  require('./routes/postRoutes')
 const userRouter = require("./routes/userRoutes")
 
 const app = express();
 app.use(express.json())
-app.use(session({
-  store: new RedisStore({client: redisClient}),
-  secret: SESSION_SECRET,
-  cookie:{
-    secure: false,
-    resave: false,
-    saveUninitialized: false,
-    httpOnly: true,
-    maxAge: 30000
-  }
-}))
+app.use(cors({}));
+
+// app.use(cookieParser());
+
+// app.use(session({
+//   store: new RedisStore({client: redisClient}),
+//   secret: SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie:{
+//     secure: false,
+//     httpOnly: true,
+//     maxAge: 30000
+//   }
+// }))
+// Configure session middleware
+const sessionMiddleware = session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'your_secret_key', // Replace with a strong, random secret
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false,} // Set to true for HTTPS in production }
+});
+
+app.use(sessionMiddleware);
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/users', userRouter)
 
