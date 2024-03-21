@@ -55,7 +55,7 @@ const sessionMiddleware = session({
   secret: 'your_secret_key', // Replace with a strong, random secret
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false,maxAge: 60000} // Set to true for HTTPS in production }
+  cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24,} // Set to true for HTTPS in production }
 });
 
 app.use(sessionMiddleware);
