@@ -11,7 +11,7 @@ const {
 } = require("./config/config");
 const cors = require("cors");
 
-
+// console.log(typeof REDIS_URL)
 
 const cookieParser = require('cookie-parser');
 const express = require("express");
@@ -21,11 +21,11 @@ const session = require("express-session");
 
 const redis =  require("redis")
 const redisClient = redis.createClient({socket:{
-  host: 'redis',
-  port: 6379,
+  host: REDIS_URL,
+  port: REDIS_PORT,
   // tls: true,
 }})
-redisClient.connect().catch(console.error)
+redisClient.connect().then(a=>console.log(a)).catch(console.error)
 
 
 
@@ -55,7 +55,7 @@ const sessionMiddleware = session({
   secret: 'your_secret_key', // Replace with a strong, random secret
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false,} // Set to true for HTTPS in production }
+  cookie: { secure: false,maxAge: 60000} // Set to true for HTTPS in production }
 });
 
 app.use(sessionMiddleware);
